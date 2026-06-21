@@ -847,12 +847,28 @@ function App() {
                           {filteredProducts.map((prod) => (
                             <tr key={prod.id} className="hover:bg-slate-50/50 dark:hover:bg-slate-850/30">
                               
-                              {/* Product visual mock using CSS gradients */}
                               <td className="py-3">
-                                <div className={`h-11 w-11 rounded-lg bg-gradient-to-br ${prod.gradient || 'from-indigo-100 to-indigo-200'} border border-slate-205 dark:border-slate-800 flex items-center justify-center relative overflow-hidden shadow-inner shrink-0`}>
-                                  <span className={`text-[8px] font-black tracking-tighter ${prod.textGradient || 'text-indigo-800'} select-none uppercase`}>
-                                    {prod.subCategory || prod.category.split(' ')[0]}
-                                  </span>
+                                <div className="h-11 w-11 rounded-lg border border-slate-205 dark:border-slate-800 flex items-center justify-center relative overflow-hidden shadow-inner shrink-0 bg-slate-100 dark:bg-slate-950">
+                                  {prod.image ? (
+                                    <img 
+                                      src={prod.image} 
+                                      alt={prod.name} 
+                                      className="absolute inset-0 w-full h-full object-cover"
+                                      onError={(e) => {
+                                        e.target.style.display = 'none';
+                                        const p = e.target.parentElement.querySelector('.fallback-placeholder');
+                                        if (p) p.style.display = 'flex';
+                                      }}
+                                    />
+                                  ) : null}
+                                  <div 
+                                    className="fallback-placeholder absolute inset-0 bg-gradient-to-br from-indigo-100 to-indigo-200 flex items-center justify-center"
+                                    style={{ display: prod.image ? 'none' : 'flex' }}
+                                  >
+                                    <span className={`text-[8px] font-black tracking-tighter ${prod.textGradient || 'text-indigo-800'} select-none uppercase`}>
+                                      {prod.subCategory || prod.category.split(' ')[0]}
+                                    </span>
+                                  </div>
                                 </div>
                               </td>
 

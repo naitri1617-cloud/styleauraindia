@@ -64,14 +64,31 @@ const ProductCard = ({ product }) => {
         )}
       </div>
 
-      {/* CSS Placeholder Image Container */}
-      <div className={`relative aspect-square w-full bg-gradient-to-br ${product.gradient} flex items-center justify-center overflow-hidden transition-all duration-500 group-hover:scale-105`}>
+      {/* Product Image Container */}
+      <div className="relative aspect-square w-full bg-slate-100 dark:bg-slate-950 flex items-center justify-center overflow-hidden transition-all duration-500 group-hover:scale-105">
+        {product.image ? (
+          <img 
+            src={product.image} 
+            alt={product.name} 
+            className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
+            onError={(e) => {
+              e.target.style.display = 'none';
+              const p = e.target.parentElement.querySelector('.fallback-placeholder');
+              if (p) p.style.display = 'flex';
+            }}
+          />
+        ) : null}
         
-        <div className="absolute w-2/3 h-2/3 rounded-full border-4 border-dashed border-white/20 dark:border-slate-800/10 scale-90 group-hover:scale-100 group-hover:rotate-45 transition-all duration-700" />
-        <div className="absolute w-1/2 h-1/2 rounded-3xl bg-white/20 dark:bg-slate-950/10 backdrop-blur-sm border border-white/30 transform rotate-12 flex items-center justify-center group-hover:rotate-45 transition-all duration-500 shadow-lg">
-          <span className={`text-4xl font-extrabold tracking-widest ${product.textGradient} select-none`}>
-            {getCategoryIconName(product.subCategory)}
-          </span>
+        <div 
+          className={`fallback-placeholder absolute inset-0 bg-gradient-to-br ${product.gradient} flex items-center justify-center`}
+          style={{ display: product.image ? 'none' : 'flex' }}
+        >
+          <div className="absolute w-2/3 h-2/3 rounded-full border-4 border-dashed border-white/20 dark:border-slate-800/10 scale-90 group-hover:scale-100 group-hover:rotate-45 transition-all duration-700" />
+          <div className="absolute w-1/2 h-1/2 rounded-3xl bg-white/20 dark:bg-slate-950/10 backdrop-blur-sm border border-white/30 transform rotate-12 flex items-center justify-center group-hover:rotate-45 transition-all duration-500 shadow-lg">
+            <span className={`text-4xl font-extrabold tracking-widest ${product.textGradient} select-none`}>
+              {getCategoryIconName(product.subCategory)}
+            </span>
+          </div>
         </div>
 
         {/* Hover Action Buttons Overlay */}

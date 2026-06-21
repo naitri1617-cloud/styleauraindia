@@ -49,13 +49,31 @@ const QuickViewModal = () => {
           <X className="h-5 w-5" />
         </button>
 
-        {/* Left Side: Product Image Placeholder */}
-        <div className={`w-full md:w-1/2 aspect-square md:aspect-auto md:h-auto bg-gradient-to-br ${selectedProduct.gradient} flex items-center justify-center relative p-8`}>
-          <div className="absolute w-3/4 h-3/4 rounded-full border-2 border-dashed border-white/10" />
-          <div className="w-40 h-40 rounded-3xl bg-white/20 dark:bg-slate-950/20 backdrop-blur-md border border-white/30 flex items-center justify-center shadow-lg">
-            <span className={`text-5xl font-black ${selectedProduct.textGradient}`}>
-              {selectedProduct.subCategory.substring(0, 3).toUpperCase()}
-            </span>
+        {/* Left Side: Product Image */}
+        <div className="w-full md:w-1/2 aspect-square md:aspect-auto md:h-auto bg-slate-100 dark:bg-slate-950 flex items-center justify-center relative overflow-hidden">
+          {selectedProduct.image ? (
+            <img 
+              src={selectedProduct.image} 
+              alt={selectedProduct.name} 
+              className="absolute inset-0 w-full h-full object-cover"
+              onError={(e) => {
+                e.target.style.display = 'none';
+                const p = e.target.parentElement.querySelector('.fallback-placeholder');
+                if (p) p.style.display = 'flex';
+              }}
+            />
+          ) : null}
+          
+          <div 
+            className="fallback-placeholder absolute inset-0 bg-gradient-to-br from-rose-100 to-rose-200 flex items-center justify-center p-8"
+            style={{ display: selectedProduct.image ? 'none' : 'flex' }}
+          >
+            <div className="absolute w-3/4 h-3/4 rounded-full border-2 border-dashed border-white/10" />
+            <div className="w-40 h-40 rounded-3xl bg-white/20 dark:bg-slate-950/20 backdrop-blur-md border border-white/30 flex items-center justify-center shadow-lg">
+              <span className={`text-5xl font-black ${selectedProduct.textGradient}`}>
+                {selectedProduct.subCategory.substring(0, 3).toUpperCase()}
+              </span>
+            </div>
           </div>
         </div>
 
