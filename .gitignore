@@ -1,0 +1,14 @@
+node_modules/
+admin/node_modules/
+customer/node_modules/
+server/node_modules/
+
+dist/
+admin/dist/
+customer/dist/
+server/dist/
+
+build/
+.env
+*.log
+.DS_Store
