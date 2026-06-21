@@ -13,7 +13,8 @@ const CartDrawer = ({ onOpenCheckout }) => {
     couponError,
     applyCoupon,
     removeCoupon,
-    setCurrentView
+    setCurrentView,
+    setSelectedCategory
   } = useContext(CartContext);
 
   const [couponCode, setCouponCode] = useState('');
@@ -145,7 +146,7 @@ const CartDrawer = ({ onOpenCheckout }) => {
                   Start adding products from our Indian fashion shop page to see them here!
                 </p>
                 <button
-                  onClick={() => { setCartOpen(false); setCurrentView('shop'); }}
+                  onClick={() => { setCartOpen(false); setCurrentView('shop'); setSelectedCategory('All'); }}
                   className="mt-4 rounded-full bg-brand-primary px-5 py-2 text-xs font-bold text-white hover:bg-brand-primary-hover transition-colors"
                 >
                   Shop Catalog

@@ -41,7 +41,23 @@ const ShopPage = () => {
 
   // Reset all filters
   const resetFilters = () => {
-    setSelectedCategory('All');
+    const path = window.location.pathname.toLowerCase().replace(/\/$/, '');
+    if (path === '/kids') {
+      setSelectedCategory('Kids');
+    } else if (path === '/men') {
+      setSelectedCategory('Men');
+    } else if (path === '/women') {
+      setSelectedCategory('Women');
+    } else if (path === '/accessories') {
+      setSelectedCategory('Accessories');
+    } else if (path === '/beauty') {
+      setSelectedCategory('Beauty');
+    } else if (path === '/sale') {
+      setSelectedCategory('Sale');
+    } else {
+      setSelectedCategory('All');
+    }
+    
     setSelectedSubCategory('All');
     setPriceRange(5000);
     setSelectedSize('All');

@@ -3,7 +3,7 @@ import { CartContext } from '../context/CartContext';
 import { ArrowRight, Sparkles, ShoppingBag, Truck, CornerDownRight, RotateCcw } from 'lucide-react';
 
 const Hero = () => {
-  const { setCurrentView } = useContext(CartContext);
+  const { setCurrentView, setSelectedCategory } = useContext(CartContext);
 
   return (
     <div className="relative overflow-hidden bg-slate-50 dark:bg-slate-950 py-12 sm:py-20 transition-colors duration-300">
@@ -33,7 +33,7 @@ const Hero = () => {
             {/* CTAs */}
             <div className="flex flex-wrap items-center gap-4">
               <button
-                onClick={() => setCurrentView('shop')}
+                onClick={() => { setCurrentView('shop'); setSelectedCategory('All'); }}
                 className="flex items-center gap-2 rounded-full bg-brand-primary px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-brand-primary/25 hover:bg-brand-primary-hover hover:scale-[1.02] active:scale-[0.98] transition-all duration-200"
               >
                 <ShoppingBag className="h-4 w-4" />
@@ -130,7 +130,7 @@ const Hero = () => {
                 <div className="flex justify-between items-center mt-2">
                   <span className="text-brand-accent font-extrabold text-sm sm:text-base">₹799.00</span>
                   <button 
-                    onClick={() => setCurrentView('shop')}
+                    onClick={() => { setCurrentView('shop'); setSelectedCategory('All'); }}
                     className="text-xs text-white bg-brand-primary hover:bg-brand-primary-hover px-3 py-1.5 rounded-lg flex items-center gap-1 font-semibold transition-all"
                   >
                     Buy Now <CornerDownRight className="h-3 w-3" />

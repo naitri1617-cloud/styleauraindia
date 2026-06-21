@@ -65,7 +65,7 @@ function App() {
   const [formData, setFormData] = useState({
     name: '',
     price: '',
-    category: 'Women Ethnic',
+    category: 'Women',
     subCategory: 'Kurti',
     stock: '',
     featured: false,
@@ -238,7 +238,7 @@ function App() {
     setFormData({
       name: '',
       price: '',
-      category: 'Women Ethnic',
+      category: 'Women',
       subCategory: 'Kurti',
       stock: '25',
       featured: false,
@@ -628,7 +628,7 @@ function App() {
                     <div className="bg-white dark:bg-slate-900 border border-light-border dark:border-dark-border p-6 rounded-3xl space-y-4 text-left shadow-sm">
                       <h3 className="text-sm font-extrabold text-slate-900 dark:text-white">Sales Categories Sizing</h3>
                       <div className="space-y-3 pt-2">
-                        {['Women Ethnic', 'Men Casuals', 'Kids Traditional', 'Bags & Accessories'].map((cat, idx) => {
+                        {['Women', 'Men', 'Kids', 'Accessories', 'Travel Bags', 'Perfumes', 'Beauty', 'Sale'].map((cat, idx) => {
                           const categoryOrders = orders.filter(o => o.status !== 'Cancelled').flatMap(o => o.items).filter(item => item.product.category === cat);
                           const totalQuantity = categoryOrders.reduce((sum, item) => sum + item.quantity, 0);
                           const totalRevenueCat = categoryOrders.reduce((sum, item) => sum + (item.product.price * item.quantity), 0);
@@ -801,10 +801,14 @@ function App() {
                         className="text-xs bg-slate-50 dark:bg-slate-950 border border-light-border dark:border-dark-border rounded-xl px-3 py-2 focus:outline-none focus:ring-1 focus:ring-brand-primary"
                       >
                         <option value="All">All Categories</option>
-                        <option value="Women Ethnic">Women Ethnic</option>
-                        <option value="Men Casuals">Men Casuals</option>
-                        <option value="Kids Traditional">Kids Traditional</option>
-                        <option value="Bags & Accessories">Bags & Accessories</option>
+                        <option value="Women">Women</option>
+                        <option value="Men">Men</option>
+                        <option value="Kids">Kids</option>
+                        <option value="Accessories">Accessories</option>
+                        <option value="Travel Bags">Travel Bags</option>
+                        <option value="Perfumes">Perfumes</option>
+                        <option value="Beauty">Beauty</option>
+                        <option value="Sale">Sale</option>
                       </select>
 
                       {/* Stock filter */}
@@ -1200,10 +1204,14 @@ function App() {
                     onChange={(e) => setFormData({ ...formData, category: e.target.value })}
                     className="w-full text-xs rounded-xl border border-light-border dark:border-dark-border bg-slate-50 dark:bg-slate-950 px-3.5 py-2.5 focus:outline-none focus:ring-1 focus:ring-brand-primary"
                   >
-                    <option value="Women Ethnic">Women Ethnic</option>
-                    <option value="Men Casuals">Men Casuals</option>
-                    <option value="Kids Traditional">Kids Traditional</option>
-                    <option value="Bags & Accessories">Bags & Accessories</option>
+                    <option value="Women">Women</option>
+                    <option value="Men">Men</option>
+                    <option value="Kids">Kids</option>
+                    <option value="Accessories">Accessories</option>
+                    <option value="Travel Bags">Travel Bags</option>
+                    <option value="Perfumes">Perfumes</option>
+                    <option value="Beauty">Beauty</option>
+                    <option value="Sale">Sale</option>
                   </select>
                 </div>
               </div>

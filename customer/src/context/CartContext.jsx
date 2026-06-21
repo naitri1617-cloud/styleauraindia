@@ -19,12 +19,78 @@ export const CartProvider = ({ children }) => {
   const [trackingLoading, setTrackingLoading] = useState(false);
   const [trackingError, setTrackingError] = useState('');
 
-  // UI View States: "home", "shop", "track-order", "contact", "policies", "my-account"
-  const [currentView, setCurrentView] = useState('home');
+  // Helper to parse location pathname for initial view/category state
+  const getInitialStateFromPath = () => {
+    const path = window.location.pathname.toLowerCase().replace(/\/$/, '');
+    if (path === '/kids') {
+      return { view: 'shop', category: 'Kids' };
+    } else if (path === '/men') {
+      return { view: 'shop', category: 'Men' };
+    } else if (path === '/women') {
+      return { view: 'shop', category: 'Women' };
+    } else if (path === '/accessories') {
+      return { view: 'shop', category: 'Accessories' };
+    } else if (path === '/beauty') {
+      return { view: 'shop', category: 'Beauty' };
+    } else if (path === '/sale') {
+      return { view: 'shop', category: 'Sale' };
+    } else if (path === '/shop') {
+      return { view: 'shop', category: 'All' };
+    } else if (path === '/track-order') {
+      return { view: 'track-order', category: 'All' };
+    } else if (path === '/my-account') {
+      return { view: 'my-account', category: 'All' };
+    } else if (path === '/policies') {
+      return { view: 'policies', category: 'All' };
+    } else if (path === '/contact') {
+      return { view: 'contact', category: 'All' };
+    }
+    return { view: 'home', category: 'All' };
+  };
+
+  const initialState = getInitialStateFromPath();
+  const [currentView, setCurrentView] = useState(initialState.view);
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [cartOpen, setCartOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
-  const [selectedCategory, setSelectedCategory] = useState('All');
+  const [selectedCategory, setSelectedCategory] = useState(initialState.category);
+
+  // Sync state to URL pathname
+  useEffect(() => {
+    let targetPath = '/';
+    if (currentView === 'shop') {
+      if (selectedCategory === 'Kids') targetPath = '/kids';
+      else if (selectedCategory === 'Men') targetPath = '/men';
+      else if (selectedCategory === 'Women') targetPath = '/women';
+      else if (selectedCategory === 'Accessories') targetPath = '/accessories';
+      else if (selectedCategory === 'Beauty') targetPath = '/beauty';
+      else if (selectedCategory === 'Sale') targetPath = '/sale';
+      else targetPath = '/shop';
+    } else if (currentView === 'track-order') {
+      targetPath = '/track-order';
+    } else if (currentView === 'my-account') {
+      targetPath = '/my-account';
+    } else if (currentView === 'policies') {
+      targetPath = '/policies';
+    } else if (currentView === 'contact') {
+      targetPath = '/contact';
+    }
+
+    if (window.location.pathname !== targetPath) {
+      window.history.pushState(null, '', targetPath);
+    }
+  }, [currentView, selectedCategory]);
+
+  // Listen for browser popstate
+  useEffect(() => {
+    const handlePopState = () => {
+      const state = getInitialStateFromPath();
+      setCurrentView(state.view);
+      setSelectedCategory(state.category);
+    };
+    window.addEventListener('popstate', handlePopState);
+    return () => window.removeEventListener('popstate', handlePopState);
+  }, []);
   
   // Theme state: "dark" or "light"
   const [theme, setTheme] = useState(() => {

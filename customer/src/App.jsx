@@ -18,7 +18,8 @@ function App() {
     trackedOrder, 
     setTrackedOrder, 
     trackingLoading, 
-    trackingError 
+    trackingError,
+    setSelectedCategory
   } = useContext(CartContext);
 
   const [checkoutOpen, setCheckoutOpen] = useState(false);
@@ -111,7 +112,7 @@ function App() {
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
                 {/* Category 1 */}
                 <div 
-                  onClick={() => setCurrentView('shop')}
+                  onClick={() => { setCurrentView('shop'); setSelectedCategory('Women'); }}
                   className="group relative h-64 rounded-3xl overflow-hidden cursor-pointer bg-gradient-to-br from-indigo-900 to-slate-900 border border-slate-850 p-6 flex flex-col justify-between shadow-sm hover:shadow-lg transition-all hover:scale-[1.01]"
                 >
                   <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_right,_var(--tw-gradient-stops))] from-brand-primary/20 via-transparent to-transparent opacity-80" />
@@ -128,7 +129,7 @@ function App() {
 
                 {/* Category 2 */}
                 <div 
-                  onClick={() => setCurrentView('shop')}
+                  onClick={() => { setCurrentView('shop'); setSelectedCategory('Men'); }}
                   className="group relative h-64 rounded-3xl overflow-hidden cursor-pointer bg-gradient-to-br from-slate-900 via-emerald-955 to-slate-900 border border-slate-855 p-6 flex flex-col justify-between shadow-sm hover:shadow-lg transition-all hover:scale-[1.01]"
                 >
                   <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_right,_var(--tw-gradient-stops))] from-emerald-500/10 via-transparent to-transparent opacity-80" />
@@ -145,7 +146,7 @@ function App() {
 
                 {/* Category 3 */}
                 <div 
-                  onClick={() => setCurrentView('shop')}
+                  onClick={() => { setCurrentView('shop'); setSelectedCategory('Accessories'); }}
                   className="group relative h-64 rounded-3xl overflow-hidden cursor-pointer bg-gradient-to-br from-slate-900 via-amber-955 to-slate-900 border border-slate-855 p-6 flex flex-col justify-between shadow-sm hover:shadow-lg transition-all hover:scale-[1.01]"
                 >
                   <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_right,_var(--tw-gradient-stops))] from-amber-500/10 via-transparent to-transparent opacity-80" />
@@ -854,10 +855,10 @@ function App() {
             <div className="space-y-3">
               <h4 className="text-slate-900 dark:text-white font-extrabold uppercase tracking-wider text-[10px]">Collection</h4>
               <ul className="space-y-2">
-                <li><button onClick={() => setCurrentView('shop')} className="hover:text-brand-primary transition-colors">Women Ethnic</button></li>
-                <li><button onClick={() => setCurrentView('shop')} className="hover:text-brand-primary transition-colors">Men Casual Shirts</button></li>
-                <li><button onClick={() => setCurrentView('shop')} className="hover:text-brand-primary transition-colors">Kids Traditional</button></li>
-                <li><button onClick={() => setCurrentView('shop')} className="hover:text-brand-primary transition-colors">Bags &amp; Accessories</button></li>
+                <li><button onClick={() => { setCurrentView('shop'); setSelectedCategory('Women'); }} className="hover:text-brand-primary transition-colors">Women Ethnic</button></li>
+                <li><button onClick={() => { setCurrentView('shop'); setSelectedCategory('Men'); }} className="hover:text-brand-primary transition-colors">Men Casual Shirts</button></li>
+                <li><button onClick={() => { setCurrentView('shop'); setSelectedCategory('Kids'); }} className="hover:text-brand-primary transition-colors">Kids Traditional</button></li>
+                <li><button onClick={() => { setCurrentView('shop'); setSelectedCategory('Accessories'); }} className="hover:text-brand-primary transition-colors">Bags &amp; Accessories</button></li>
               </ul>
             </div>
 
