@@ -9,7 +9,7 @@ const __dirname = path.dirname(__filename);
 const dbPath = path.join(__dirname, 'db.json');
 
 const app = express();
-const PORT = process.env.PORT || 80;
+const PORT = process.env.PORT || 5000;
 
 // Enable CORS, JSON, and URL-encoded body parsing
 app.use(cors());
